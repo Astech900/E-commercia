@@ -1,0 +1,104 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+    <body class="bg-light">
+        <div class="container-fluid py-4">
+            <!-- Cart Items Details -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-light py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3><b>Your Carted Item</b></h3>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-print me-1"></i>Print List
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="15%">Image</th>
+                                            <th>Product</th>
+                                            <th width="20%">Price</th>
+                                            <th>Decision</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartItemsBody">
+                                        <% for(let cart of cartItem) { %>
+                                            <tr>
+                                                <td>
+                                                    <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                                                        style="width: 60px; height: 60px;">
+                                                        <a href="#">
+                                                            <img style="object-fit: cover; width: 2rem; height: 2rem;"
+                                                                src="<%= cart.product_image[0].url %>" alt="">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 fw-semibold">
+                                                        <%= cart.product_name %>
+                                                    </h6>
+                                                </td>
+                                                <td><strong class="fs-5">$<%= cart.product_price %></strong></td>
+                                                <td class="text-right d-flex flex-wrap justify-content-end" >
+                                                    <a class="btn btn-danger me-2 btn-buy"
+                                                        href="/cart/drop/<%= cart._id %>"><i
+                                                            class="fa fa-trash"></i></a>
+                                                    <form method="post" action="/order/<%= cart._id %>">
+                                                        <button class="btn btn-success  text-light btn-buy"
+                                                            ><b>Order now</b></button>
+                                                    </form>
+
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Cart Summary:</strong> 2 items
+                                    </div>
+                                    <div class="col-md-6 text-end d-flex justify-content-between">
+                                        <button class="btn  btn-success fw-semibold text-light ps-4 pe-4">Order
+                                            Now</button>
+                                        <strong>Total: $248.00</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Add click handlers for action buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    if (this.classList.contains('btn-primary') || this.classList.contains('btn-outline-primary')) {
+                        e.preventDefault();
+                        const icon = this.querySelector('i');
+                        const originalClass = icon.className;
+
+                        // Animate the button
+                        icon.className = 'fas fa-spinner fa-spin';
+                        this.disabled = true;
+
+                        setTimeout(() => {
+                            icon.className = originalClass;
+                            this.disabled = false;
+                        }, 1000);
+                    }
+                });
+            });
+        </script>
+    </body>

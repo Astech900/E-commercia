@@ -1,0 +1,88 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+  <body>
+    <div class="container p-4 d-flex justify-content-center align-iten-center">
+
+      <div class="containers" id="container">
+        <div class="form-containers sign-up-container">
+          <form method="POST" action="/user/signup" class="forms needs-validation" novalidate>
+           
+            <h1>Create Account</h1>
+
+            <input type="text" id="signupUsername" name="signup[fullname]" placeholder="Full Name"
+              class="form-control form-controlr" required minlength="5" maxlength="25" />
+            <div class="invalid-feedback">Please enter valid Full Name</div>
+
+            <input type="text" id="signupUsername" name="signup[username]" placeholder="@username"
+              class="form-control form-controlr userinput" required minlength="5" maxlength="15" />
+            <div class="invalid-feedback">Please enter valid username</div>
+
+            <input type="email" id="signupEmail" name="signup[email]" placeholder="Email" class="form-control form-controlr"
+              required />
+            <div class="invalid-feedback">Please enter a valid email</div>
+
+            <input type="password" id="signupPassword" name="signup[password]" placeholder="Password"
+              class="form-control form-controlr" required minlength="4" maxlength="16" />
+            <div class="invalid-feedback">Please enter a password</div>
+
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+
+        <div class="form-containers sign-in-container">
+          <form method="POST" action="/user/login" class="forms needs-validation" novalidate>
+            <h1>Sign in</h1>
+            <input type="text" id="signinUsername" name="username" placeholder="@Username"
+              class="form-control form-controlr userinput" required minlength="5" maxlength="15" />
+            <div class="invalid-feedback">Please enter valid username</div>
+
+            <input type="password" id="signinPassword" name="password" placeholder="Password"
+              class="form-control form-controlr" required minlength="4" maxlength="16" />
+            <div class="invalid-feedback">Please enter your password</div>
+
+            <a href="#">Forgot your password?</a>
+            <button type="submit">Log In</button>
+          </form>
+        </div>
+
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class="ghost" id="signIn">Log In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start journey with us</p>
+              <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const signUpButton = document.getElementById('signUp');
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
+
+      signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+      });
+
+      signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+      });
+
+      window.addEventListener('DOMContentLoaded', () => {
+        if (window.location.pathname.includes('signup')) {
+          container.classList.add('right-panel-active');
+        } else {
+          container.classList.remove('right-panel-active');
+        }
+      });
+
+
+    </script>
+  </body>

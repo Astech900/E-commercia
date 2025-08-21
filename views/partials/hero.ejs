@@ -1,0 +1,196 @@
+ 
+</head>
+<body>
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+        </div>
+        
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active slide-1">
+                <div class="sale-badge">
+                    <i class="fas fa-fire"></i> MEGA SALE
+                </div>
+                <div class="floating-elements">
+                    <i class="fas fa-shopping-bag floating-icon"></i>
+                    <i class="fas fa-heart floating-icon"></i>
+                    <i class="fas fa-star floating-icon"></i>
+                </div>
+                <div class="carousel-content">
+                    <h1>Summer Collection 2025</h1>
+                    <p>Discover the latest trends with up to 70% off on premium fashion. Limited time offer on selected items.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary-hero btn-hero">
+                            <i class="fas fa-shopping-cart"></i> Shop Now
+                        </button>
+                        <button class="btn btn-outline-hero btn-hero">
+                            <i class="fas fa-eye"></i> View Collection
+                        </button>
+                    </div>
+                </div>
+                <div class="product-highlight">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop&crop=center" alt="Featured Product">
+                    <h4>Designer Dress</h4>
+                    <div class="price">$89.99</div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item slide-2">
+                <div class="sale-badge">
+                    <i class="fas fa-bolt"></i> NEW ARRIVALS
+                </div>
+                <div class="floating-elements">
+                    <i class="fas fa-mobile-alt floating-icon"></i>
+                    <i class="fas fa-laptop floating-icon"></i>
+                    <i class="fas fa-headphones floating-icon"></i>
+                </div>
+                <div class="carousel-content">
+                    <h1>Tech Revolution</h1>
+                    <p>Experience the future with cutting-edge electronics and smart devices. Free shipping on orders over $100.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary-hero btn-hero">
+                            <i class="fas fa-rocket"></i> Explore Tech
+                        </button>
+                        <button class="btn btn-outline-hero btn-hero">
+                            <i class="fas fa-gift"></i> Special Offers
+                        </button>
+                    </div>
+                </div>
+                <div class="product-highlight">
+                    <img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=200&h=200&fit=crop&crop=center" alt="Tech Product">
+                    <h4>Smart Watch Pro</h4>
+                    <div class="price">$299.99</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item slide-3">
+                <div class="sale-badge">
+                    <i class="fas fa-home"></i> HOME & LIVING
+                </div>
+                <div class="floating-elements">
+                    <i class="fas fa-couch floating-icon"></i>
+                    <i class="fas fa-lightbulb floating-icon"></i>
+                    <i class="fas fa-leaf floating-icon"></i>
+                </div>
+                <div class="carousel-content">
+                    <h1>Transform Your Space</h1>
+                    <p>Create your dream home with our curated collection of furniture and decor. Get inspired today.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary-hero btn-hero">
+                            <i class="fas fa-home"></i> Shop Home
+                        </button>
+                        <button class="btn btn-outline-hero btn-hero">
+                            <i class="fas fa-palette"></i> Get Ideas
+                        </button>
+                    </div>
+                </div>
+                <div class="product-highlight">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=200&h=200&fit=crop&crop=center" alt="Home Product">
+                    <h4>Modern Lamp</h4>
+                    <div class="price">$149.99</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="carousel-item slide-4">
+                <div class="sale-badge">
+                    <i class="fas fa-dumbbell"></i> FITNESS
+                </div>
+                <div class="floating-elements">
+                    <i class="fas fa-running floating-icon"></i>
+                    <i class="fas fa-bicycle floating-icon"></i>
+                    <i class="fas fa-heartbeat floating-icon"></i>
+                </div>
+                <div class="carousel-content">
+                    <h1>Fitness Revolution</h1>
+                    <p>Achieve your fitness goals with premium equipment and activewear. Start your transformation journey.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary-hero btn-hero">
+                            <i class="fas fa-dumbbell"></i> Start Training
+                        </button>
+                        <button class="btn btn-outline-hero btn-hero">
+                            <i class="fas fa-trophy"></i> Join Challenge
+                        </button>
+                    </div>
+                </div>
+                <div class="product-highlight">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center" alt="Fitness Product">
+                    <h4>Premium Dumbbells</h4>
+                    <div class="price">$199.99</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        // Enhanced carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = new bootstrap.Carousel(document.getElementById('heroCarousel'), {
+                interval: 5000,
+                wrap: true,
+                touch: true
+            });
+
+            // Add touch gestures for mobile
+            let startX = 0;
+            let endX = 0;
+            const carouselElement = document.getElementById('heroCarousel');
+
+            carouselElement.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            });
+
+            carouselElement.addEventListener('touchend', function(e) {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const threshold = 50;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        carousel.next();
+                    } else {
+                        carousel.prev();
+                    }
+                }
+            }
+
+            // Pause carousel on hover
+            carouselElement.addEventListener('mouseenter', function() {
+                carousel.pause();
+            });
+
+            carouselElement.addEventListener('mouseleave', function() {
+                carousel.cycle();
+            });
+
+            // Add click handlers for CTA buttons
+            document.querySelectorAll('.btn-hero').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add your click handling logic here
+                    console.log('Button clicked:', this.textContent);
+                    
+                    // Example: Add ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>

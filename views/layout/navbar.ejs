@@ -1,0 +1,80 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark  navbar-bg increase-pding sticky-top ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><b>E-commercia</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-2 navbar-bg" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-door"></i>
+                            Explore</a>
+                    </li> -->
+                    <li class="nav-item dropdown  ">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-shop"></i> Category
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                            <li class=""><a class="dropdown-item d-items " href="#">All Products</a></li>
+                            <li>
+                                <hr class="dropdown-divider all-product">
+                            </li>
+                            <li><a class="dropdown-item d-items" href="#">Sports</a></li>
+                            <li><a class="dropdown-item d-items" href="#">Fashion</a></li>
+                            <li><a class="dropdown-item d-items" href="#">Electronics</a></li>
+                            <li><a class="dropdown-item d-items" href="#">Health & Beauty</a></li>
+                            <li><a class="dropdown-item d-items" href="#">Toys & Games</a></li>
+                            <li><a class="dropdown-item d-items" href="#">Others</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2 search-input" type="search" placeholder="Search products">
+                    <button class="btn  text-light nav-search-btn " type="submit"><i
+                            class="fa-solid fa-magnifying-glass"></i>Search</button>
+                </form>
+
+                <ul class="navbar-nav ms-auto">
+                    <% if (currentUser && currentUser !==undefined) { %>
+                        <li class="nav-item cart-items text-start">
+                            <a class="nav-link active " href="/order/<%= currentUser._id %>/dashboard"></i>Dashboard</a>
+                        </li>
+                        <li class="nav-item cart-items text-start">
+                            <a class="nav-link active " href="/product/new"><i class="fas fa-plus me-2"></i>Add
+                                Product</a>
+                        </li>
+                        <% } %>
+
+                            <li class="nav-item cart-items">
+                                <a class="nav-link active" href="/cart"><i
+                                        class="fa-solid fa-cart-shopping me-1"></i><b>Cart</b></a>
+                            </li>
+                            
+                            <% if (currentUser) { %>
+                                <!-- user is logged in -->
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="/user/logout"><i class="bi bi-person"></i> Log
+                                        out</a>
+                                </li>
+                                <% } else { %>
+                                    <!-- user is NOT logged in -->
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="/user/login">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="/user/signup"><i class="bi bi-person"></i> Sign
+                                            Up</a>
+                                    </li>
+                                    <% } %>
+
+
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+</body>

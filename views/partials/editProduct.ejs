@@ -1,0 +1,70 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Edit Product</h4>
+                    </div>
+                    <div class="card-body">
+                        <form  method="POST" action="/product/<%= product._id %>/edit?_method=PUT" enctype="multipart/form-data">
+                         
+                            
+                            <!-- Product Name -->
+                            <div class="mb-3">
+                                <label for="product_name" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="product_name" name="products[name]" 
+                                       value="<%= product.product_name %>" required>
+                            </div>
+
+                            <!-- Product Price -->
+                            <div class="mb-3">
+                                <label for="product_price" class="form-label">Price ($)</label>
+                                <input type="number" class="form-control" id="product_price" name="products[price]" 
+                                       value="<%= product.product_price %>" step="0.01" min="0" required>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="mb-3">
+                                <label for="product_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="product_description" name="products[des]" 
+                                          rows="4" required><%= product.product_description %></textarea>
+                            </div>
+
+                            <!-- Current Image -->
+                            <% if (product.product_image && product.product_image.length > 0) { %>
+                            <div class="mb-3">
+                                <label class="form-label">Current Image</label>
+                                <div class="d-flex align-items-center">
+                                    <img src="<%= product.product_image[0].url %>" 
+                                         alt="Current product image" 
+                                         class="img-thumbnail me-3" 
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                    <small class="text-muted"><%= product.product_image[0].filename %></small>
+                                </div>
+                            </div>
+                            <% } %>
+
+                            <!-- New Image Upload -->
+                            <div class="mb-3">
+                                <label for="product_image" class="form-label">
+                                    <%= product.product_image && product.product_image.length > 0 ? 'Replace Image' : 'Upload Image' %>
+                                </label>
+                                <input type="file" class="form-control" id="product_image" name="products[images]" 
+                                       accept="image/*">
+                                <div class="form-text">Leave empty to keep current image</div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between">
+                                <a href="/product/<%= product._id %>" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Update Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

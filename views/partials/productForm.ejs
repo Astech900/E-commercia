@@ -1,0 +1,77 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h1><i class="fas fa-store me-3"></i>Sell Your Product</h1>
+                    </div>
+                   
+                    <div class="form-body">
+                        <form  action="/product/new" method="POST" id="productForm"  enctype="multipart/form-data" class="needs-validation" novalidate >
+                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <!-- Product Name -->
+                              
+                            <div class="form-floating">
+                                <input type="text" class="form-control form-controls" id="productName" name="products[name]" placeholder="Product Name" maxlength="100" required>
+                                <label for="productName"><i class="fas fa-tag me-2"></i>Product Name</label>
+                                <div class="character-count">
+                                    <span id="nameCount">0</span>/100
+                                </div>
+                               
+                                <div class="error-message" id="nameError"></div>
+                            </div>
+
+                            <!-- Product Price -->
+                            <div class="form-floating">
+                                <input type="number" class="form-control form-controls" id="productPrice" name="products[price]" placeholder="0.00" min="0.01" step="0.01" required>
+                                <label for="productPrice"><i class="fas fa-dollar-sign me-2"></i>Product Price ($)</label>
+                                <div class="error-message" id="priceError"></div>
+                            </div>
+
+                            <!-- Product Images -->
+                            <div class="mb-4">
+                                <label class="form-label h5 mb-3">
+                                    <i class="fas fa-images me-2"></i>Product Images
+                                </label>
+                                <div class="upload-area" id="uploadArea">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <h4>Drop images here or click to browse</h4>
+                                    <p class="text-muted mb-0">Support: JPG, PNG, WebP</p>
+                                    <input type="file" id="productImages" name="products[images]" multiple accept="image/*" style="display: none;" required >
+                                    <div class="invalid-feedback">Choose your prodcut Photo</div>
+                                </div>
+                                <div class="image-preview" id="imagePreview"></div>
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="form-floating">
+                                <textarea class="form-control form-controls" id="productDescription" name="products[des]" placeholder="Product Description" maxlength="500" style="height: 120px;" required></textarea>
+                                <label for="productDescription"><i class="fas fa-align-left me-2"></i>Product Description</label>
+                                <div class="character-count">
+                                    <span id="descCount">0</span>/500
+                                </div>
+                                <div class="error-message" id="descError"></div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-submit btn-lg">
+                                    <i class="fas fa-rocket me-2"></i>List Product
+                                </button>
+                            </div>
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</body>
+ 

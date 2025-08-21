@@ -1,0 +1,53 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+   <body>
+
+      <div class="container mt-3 mb-2">
+         <%- include("./partials/hero.ejs") %>
+      </div>
+
+
+      <div class="container pt-4 pb-4">
+         
+         <div class="row g-3">
+            <% for(let product of allData) { %>
+               <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                  <a href="/product/<%= product._id %>" class="text-decoration-none">
+                     <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                           <img src="<%= product.product_image[0].url %>" class="card-img-top"
+                              alt="<%= product.product_name %>"
+                              style="height: 200px; object-fit: cover; transition: transform 0.3s ease;">
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                           <h5 class="card-title text-dark fw-bold mb-2">
+                              <%= product.product_name %>
+                           </h5>
+                           <div class="text-success fw-bold fs-5 mb-2">$<%= product.product_price %>
+                           </div>
+                           <p class="card-text text-muted small flex-grow-1 mb-3" style="line-height: 1.4;">
+                              <%= product.product_description %>
+                           </p>
+                           <% if (!Array.isArray(carted) || !carted.some(item=> item.id === product._id.toString())) {
+                              %>
+                              <div class="d-flex">
+                                 <button class="btn btn-primary w-50 fw-semibold"
+                                    onclick="addToCart('<%= product._id %>', this)">Add to Cart</button>
+                                 <button class="btn btn-primary bg-success w-50 fw-semibold ">Order Now</button>
+                              </div>
+                              <% } else{ %>
+                                 <button
+                                    class="btn   fw-semibold text-opacity-50 bg-success btn-successs text-light">Added!</button>
+                                 <% } %>
+
+                        </div>
+                     </div>
+                  </a>
+               </div>
+               <% } %>
+         </div>
+      </div>
+
+
+
+   </body>

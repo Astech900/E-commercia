@@ -1,0 +1,444 @@
+<% layout("./layout/mainBoylerplate") -%>
+
+
+
+    <body>
+
+
+        <div class="container my-4">
+            <div class="main-container">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb " class="p-3">
+                    <ol class="breadcrumb mb-0 ">
+                        <li class="breadcrumb-item">
+                            <a href="#">
+                                <i class="bi bi-house"></i> Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Electronics</a></li>
+                        <li class="breadcrumb-item"><a href="#">Headphones</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Wireless Headphones Pro</li>
+                        <li>
+                            <div class="dropdown position-fixed top-0 mt-2 end-0 me-2 bg-light text-dark">
+                                <a class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <b> <i class="fa-solid fa-ellipsis-vertical"></i></b>
+                                </a>
+
+                                <% if (currentUser && currentUser._id.equals(product.product_owner._id)) { %>
+                                    <ul class="dropdown-menu z-3 position-absolute">
+                                        <li><a class="dropdown-item" href="/product/<%= product._id %>/edit">Edit
+                                                Post</a></li>
+                                        <li>
+                                            <form method="POST"
+                                                action="/product/<%= product._id %>/delete?_method=DELETE">
+                                                <button class="dropdown-item text-danger">Delete Post</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    <% } %>
+
+
+                            </div>
+                        </li>
+                    </ol>
+
+
+
+                </nav>
+
+                <!-- Product Main Section -->
+                <div class="container-fluid p-4">
+                    <div class="row g-5">
+                        <!-- Product Images -->
+                        <div class="col-lg-6">
+                            <div class="product-image-container ">
+                                <img src="<%= product.product_image[0].url %>" alt="Wireless Headphones Pro"
+                                    class="main-image mb-3" id="mainImage">
+                                <div class="thumbnail-container d-flex gap-2 justify-content-center">
+                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&h=100&fit=crop&crop=center"
+                                        alt="Main view" class="thumbnail active"
+                                        onclick="changeImage('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=400&fit=crop&crop=center', this)">
+
+                                    <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=100&h=100&fit=crop&crop=center"
+                                        alt="Side view" class="thumbnail"
+                                        onclick="changeImage('https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=400&fit=crop&crop=center', this)">
+
+                                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=100&h=100&fit=crop&crop=center"
+                                        alt="Detail view" class="thumbnail"
+                                        onclick="changeImage('https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop&crop=center', this)">
+
+                                    <img src="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=100&h=100&fit=crop&crop=center"
+                                        alt="Features view" class="thumbnail"
+                                        onclick="changeImage('https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=600&h=400&fit=crop&crop=center', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="col-lg-6">
+                            <h1 class="product-title mb-3">
+                                <%= product.product_name %>
+                            </h1>
+
+                            <!-- Rating -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rating-stars me-2">★★★★★</div>
+                                <small class="text-muted">(4.8/5) 324 reviews</small>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="d-flex align-items-center mb-4">
+                                <span class="price-current me-3">$<%= product.product_price %></span>
+                                <span class="price-original me-3">$<%= product.product_price %></span>
+                                <span class="badge discount-badge text-white">25% OFF</span>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="lead mb-4">
+                                Experience premium audio quality with our latest Wireless Headphones Pro.
+                                Featuring active noise cancellation, 30-hour battery life, and crystal-clear
+                                sound reproduction.
+                            </p>
+
+                            <!-- Color Options -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-2">Color:</h6>
+                                <div class="d-flex gap-2">
+                                    <div class="color-option black active" data-color="black"
+                                        onclick="selectColor(this)"></div>
+                                    <div class="color-option white" data-color="white" onclick="selectColor(this)">
+                                    </div>
+                                    <div class="color-option blue" data-color="blue" onclick="selectColor(this)"></div>
+                                    <div class="color-option red" data-color="red" onclick="selectColor(this)"></div>
+                                </div>
+                            </div>
+
+                            <!-- Size Options -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-2">Size:</h6>
+                                <div class="btn-group" role="group">
+                                    <input type="radio" class="btn-check" name="size" id="standard" checked>
+                                    <label class="btn btn-outline-secondary size-option active" for="standard"
+                                        onclick="selectSize(this, 'standard')">Standard</label>
+
+                                    <input type="radio" class="btn-check" name="size" id="compact">
+                                    <label class="btn btn-outline-secondary size-option" for="compact"
+                                        onclick="selectSize(this, 'compact')">Compact</label>
+
+                                    <input type="radio" class="btn-check" name="size" id="xl">
+                                    <label class="btn btn-outline-secondary size-option" for="xl"
+                                        onclick="selectSize(this, 'xl')">XL</label>
+                                </div>
+                            </div>
+
+                            <!-- Quantity -->
+                            <div class="row mb-4">
+                                <div class="col-auto">
+                                    <h6 class="fw-bold mb-2">Quantity:</h6>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary quantity-btn" type="button"
+                                            onclick="changeQuantity(-1)">
+                                            <i class="fa-solid fa-caret-down"></i>
+                                        </button>
+                                        <input type="number" class="form-control quantity-input" id="quantity" value="1"
+                                            min="1" max="10">
+                                        <button class="btn btn-outline-secondary quantity-btn" type="button"
+                                            onclick="changeQuantity(1)">
+                                            <i class="fa-solid fa-caret-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-grid gap-2 d-md-flex mb-4">
+
+                                <% if (!Array.isArray(carted) || !carted.some(item=> item.id ===
+                                    product._id.toString())) { %>
+
+                                    <button class="btn btn-primary-custom w-50  btn-lg flex-fill text-light"
+                                        onclick="addToCart('<%= product._id %>', this)">
+                                        <i class="fa-solid fa-cart-shopping me-2"></i> Add to Cart
+                                    </button>
+                                    <form method="post" action="/order/<%= product._id %>">
+                                        <button class="btn  w-100 fw-semibold  bg-success text-light btn-buy ">Order
+                                            now</button>
+                                    </form>
+
+                                    <% } else { %>
+                                        <button
+                                            class="btn btn-primary-custom w-50  btn-lg flex-fill text-light text-opacity-50"
+                                            disabled>
+                                            <i class="fa-solid fa-cart-shopping me-2"></i> Added!
+                                        </button>
+                                        <form method="post" action="/order/<%= product._id %>">
+                                            <button class="btn  w-100 fw-semibold  bg-success text-light btn-buy">Order
+                                                Now</button>
+                                        </form>
+
+
+
+                                        <% } %>
+
+
+
+
+                            </div>
+
+                            <!-- Features -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h6 class="card-title fw-bold">Key Features</h6>
+                                    <ul class="features-list mb-0">
+                                        <li>Active Noise Cancellation</li>
+                                        <li>30-Hour Battery Life</li>
+                                        <li>Quick Charge Technology</li>
+                                        <li>Premium Audio Drivers</li>
+                                        <li>Bluetooth 5.2 Connectivity</li>
+                                        <li>Touch Controls</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Info -->
+                            <div class="shipping-info p-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-truck text-success fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="text-success mb-1">Free Shipping</h6>
+                                        <small>Free delivery on orders over $100. Estimated delivery: 2-3 business
+                                            days</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Tabs -->
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <ul class="nav nav-pills nav-justified border-bottom" id="productTabs">
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#reviews">
+                                        Reviews
+                                    </button>
+
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#specifications">
+                                        Specifications
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link " data-bs-toggle="pill" data-bs-target="#description">
+                                        Description
+                                    </button>
+
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#shipping">
+                                        Shipping
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content p-4">
+                                <div class="tab-pane  " id="description">
+                                    <h4>Product Description</h4>
+                                    <p>The Wireless Headphones Pro represent the pinnacle of audio engineering,
+                                        combining cutting-edge technology with premium materials to deliver an
+                                        unparalleled listening experience. These headphones feature advanced active
+                                        noise cancellation that adapts to your environment, ensuring crystal-clear audio
+                                        whether you're in a busy office, on a plane, or at home.</p>
+                                    <p>With a remarkable 30-hour battery life, you can enjoy your favorite music,
+                                        podcasts, and calls all day long. The quick charge feature provides 3 hours of
+                                        playback with just 10 minutes of charging, perfect for those always on the go.
+                                    </p>
+                                </div>
+
+                                <div class="tab-pane fade" id="specifications">
+                                    <h4>Technical Specifications</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Driver:</strong></td>
+                                                        <td>40mm dynamic drivers</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Frequency Response:</strong></td>
+                                                        <td>20Hz - 20kHz</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Battery Life:</strong></td>
+                                                        <td>Up to 30 hours</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Connectivity:</strong></td>
+                                                        <td>Bluetooth 5.2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Weight:</strong></td>
+                                                        <td>280g</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Dimensions:</strong></td>
+                                                        <td>19 × 16 × 8 cm</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade show active" id="reviews">
+                                    <h4>Customer Reviews</h4>
+                                    <form method="POST" action="/review/<%= product._id %>" class="needs-validation"
+                                        novalidate>
+                                        <h4 class="pt-2 pb-1">
+                                            <fieldset class="starability-slot">
+                                                <input type="radio" id="no-rate" class="input-no-rate"
+                                                    name="products[rating]" value="2" checked aria-label="No rating." />
+                                                <input type="radio" id="first-rate1" name="products[rating]"
+                                                    value="1" />
+                                                <label for="first-rate1" title="Terrible">1 star</label>
+                                                <input type="radio" id="first-rate2" name="products[rating]"
+                                                    value="2" />
+                                                <label for="first-rate2" title="Not good">2 stars</label>
+                                                <input type="radio" id="first-rate3" name="products[rating]"
+                                                    value="3" />
+                                                <label for="first-rate3" title="Average">3 stars</label>
+                                                <input type="radio" id="first-rate4" name="products[rating]"
+                                                    value="4" />
+                                                <label for="first-rate4" title="Very good">4 stars</label>
+                                                <input type="radio" id="first-rate5" name="products[rating]"
+                                                    value="5" />
+                                                <label for="first-rate5" title="Amazing">5 stars</label>
+                                            </fieldset>
+                                        </h4>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+
+                                                <div class="form-floating">
+                                                    <textarea class="form-control" name="products[review]"
+                                                        placeholder="Leave a review here" id="floatingTextarea2"
+                                                        style="height: 100px" required></textarea>
+                                                    <label for="floatingTextarea2">Comments</label>
+                                                    <div class="invalid-feedback">
+                                                        Enter Your review!
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn btn-success">Submit</button>
+                                    </form>
+
+                                </div>
+
+                                <% for(review of product.review) { %>
+
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="text-warning mb-2">
+                                                    <p class="starability-result" data-rating="<%= review.rating %>">
+                                                    </p>
+                                                </div>
+                                                <h6 class="card-title">
+                                                    <%= review.review_owner.fullname %>
+                                                </h6>
+                                                <p class="card-text">"<%= review.review %>"</p>
+                                            </div>
+
+                                            <% if (currentUser &&
+                                                currentUser._id.toString() === review.review_owner._id.toString()) { %>
+                                                <form method="post"
+                                                    action="/review/<%= product._id %>/<%= review._id %>/delete?_method=delete">
+                                                    <button
+                                                        class="btn btn-outline-warning w-25 m-2 text-dark">Delete</button>
+                                                </form>
+                                                <% } %>
+
+
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="shipping">
+                            <h4>Shipping Information</h4>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <strong>Free Standard Shipping:</strong>
+                                            <span>5-7 business days</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <strong>Express Shipping:</strong>
+                                            <span>2-3 business days ($15.99)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <strong>Overnight Shipping:</strong>
+                                            <span>Next business day ($29.99)</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <strong>Return Policy:</strong>
+                                            <span>30-day money-back guarantee</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (() => {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()</script>
+
+        <!-- Bootstrap JS -->
+
+    </body>
