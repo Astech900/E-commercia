@@ -2,6 +2,8 @@ if (process.env.NODE_ENV != "production") {
   require('dotenv').config()
 }
 
+const dbUrl = process.env.ATLAS_URL;
+// console.log(dbUrl)
 // console.log(process.env.CLOUD_NAME);
 // console.log(process.env.CLOUD_API_SECRET);
 // // console.log(process.env.CLOUD_URL);
@@ -14,8 +16,9 @@ const path = require('path');
 const engine = require('ejs-mate');
 const { default: mongoose } = require('mongoose');
 const ExpreeError = require('./utils/ExpressError.js');
-const dbsUrl = 'mongodb://127.0.0.1:27017/E-commercia';
+// const dbsUrl = 'mongodb://127.0.0.1:27017/E-commercia';
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
@@ -37,24 +40,14 @@ const cartRoutes = require("./routes/cart.js");
 const userRoutes = require('./routes/user.js');
 const User = require('./models/user.js');
 const orderRoutes = require('./routes/order.js');
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 
 
-main().then(res => {
-  console.log('Databse Conncted Successfully!');
-}).catch(err => {
-  console.log(err)
-})
-
-async function main() {
-  await mongoose.connect(dbsUrl);
-
-}
 
 app.use(cors({
-  origin: 'http://localhost:3000/',
-  optionsSuccessStatus: 200
+  origin: process.env.CORS_ORIGIN || '*', 
+  credentials: true
 }));
 
 app.engine('ejs', engine);
@@ -67,8 +60,23 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET 
+    },
+    touchAfter: 24 * 3600
+
+});
+
+store.on("error", () => {
+    console.log('ERROR OCCURSE IN SESSION STORERAGE');
+});
+
+
+
 const sessionOption = {
-  secret: 'ecommerciasite',
+  secret: process.env.SECRET || 'SADFHASDFJSDJFOISJDF',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -96,12 +104,28 @@ app.use((req, res, next) => {
 });
 
 
+
+main().then(res => {
+  console.log('Databse Conncted Successfully!');
+}).catch(err => {
+  console.log(err)
+})
+
+async function main() {
+  await mongoose.connect(dbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true
+  })
+
+}
+
 app.use("/", mainRoutes);
 app.use("/product", productRoute);
 app.use("/cart", cartRoutes);
 app.use("/review", reviewRoutes);
 app.use("/user", userRoutes);
-app.use("/order",orderRoutes)
+app.use("/order", orderRoutes)
 
 
 
